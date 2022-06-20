@@ -2,7 +2,11 @@
     <div class="">
         <h3>{{ !this.userid ? 'All Posts' : 'Posts' }}</h3>
 
-        <table class="table table-striped table-hover">
+        <b v-if="isLoading">Loading...</b>
+
+        <b v-else-if="!posts.length">No data found!</b>
+
+        <table class="table table-striped table-hover" v-else>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -35,6 +39,7 @@ export default {
     },
     data() {
         return {
+            isLoading: true,
             posts: [],
             userid: this.$route.params.userid,
         };
@@ -43,12 +48,14 @@ export default {
         fetchAllPosts(page = 1) {
             axios
                 .get('https://gorest.co.in/public/v2/posts?page=' + page)
-                .then((response) => (this.posts = response.data));
+                .then((response) => (this.posts = response.data))
+                .then(() => (this.isLoading = false));
         },
         fetchUserPosts(userid, page = 1) {
             axios
                 .get('https://gorest.co.in/public/v2/users/' + userid + '/posts?page=' + page)
-                .then((response) => (this.posts = response.data));
+                .then((response) => (this.posts = response.data))
+                .then(() => (this.isLoading = false));
         },
     },
     mounted() {

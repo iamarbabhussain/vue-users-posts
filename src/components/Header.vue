@@ -6,12 +6,23 @@
             </li>
 
             <li class="nav-item">
-                <router-link to="/" class="nav-link">Users</router-link>
+                <router-link to="/users" class="nav-link">Users</router-link>
             </li>
 
             <li class="nav-item">
-                <router-link to="/" class="nav-link">Posts</router-link>
+                <router-link to="/posts" class="nav-link">Posts</router-link>
             </li>
         </ul>
     </div>
 </template>
+
+<style scoped>
+.nav-item .nav-link,
+.nav-item .nav-link:focus {
+    color: black;
+}
+
+.router-link-active {
+    font-weight: bold;
+}
+</style>

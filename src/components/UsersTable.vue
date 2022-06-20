@@ -9,6 +9,7 @@
                     <th>Email</th>
                     <th>Gender</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
 
@@ -19,6 +20,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.gender }}</td>
                     <td>{{ user.status }}</td>
+                    <td><router-link :to="{ name: 'userposts', params: { userid: user.id } }"> Posts </router-link></td>
                 </tr>
             </tbody>
         </table>

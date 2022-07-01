@@ -10,13 +10,7 @@ const routes = [
         path: '/login',
         name: 'login',
         component: LoginView,
-        beforeEnter: () => {
-            const authUserStore = useAuthUserStore();
-
-            if (authUserStore.isLoggedIn) {
-                return '/';
-            }
-        },
+        meta: { preventAuthUsers: true },
     },
     {
         path: '/',
@@ -52,6 +46,7 @@ router.beforeEach((to, from) => {
     const userAuthStore = useAuthUserStore();
 
     if (to.meta.requiresAuth && !userAuthStore.isLoggedIn) return { name: 'login' };
+    if (to.meta.preventAuthUsers && userAuthStore.isLoggedIn) return { name: 'home' };
 });
 
 export default router;

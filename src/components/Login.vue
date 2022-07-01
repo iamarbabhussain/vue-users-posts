@@ -57,11 +57,10 @@ export default {
                     },
                 })
                 .then((response) => {
-                    console.log(response.data.session);
-
                     localStorage.setItem(
                         'authData',
                         JSON.stringify({
+                            isLoggedIn: true,
                             userId: response.data.session.userId,
                             sessionId: response.data.session.id,
                         })
